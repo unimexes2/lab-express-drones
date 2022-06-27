@@ -10,7 +10,7 @@ const Drone = require("../models/Drone.model");
 const mongoose = require("mongoose");
 
 mongoose
-  .connect("mongodb://localhost:27017/drone")
+  .connect("mongodb://localhost:27017/drones")
   .then((response) => {
     console.log("conectados a la Dase de Datos");
 debugger
