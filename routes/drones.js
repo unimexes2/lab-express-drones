@@ -51,10 +51,36 @@ router.post('/drones/create', (req, res, next) => {
 
 router.get('/drones/:id/edit', (req, res, next) => {
   // Iteration #4: Update the drone
+  Drone.findById(req.params.id)
+ 
+  .then((response) => {
+
+    console.log(response,"drone response");
+    res.render("./drones/update-form.hbs", { response });
+  })
+  .catch((err) => {
+    next(err);
+  });
+
+
+
   // ... your code here
 });
 
 router.post('/drones/:id/edit', (req, res, next) => {
+ 
+  debugger
+  Drone.findOneAndReplace({"_id":req.params.id},req.body)
+ 
+  .then((response) => {
+    console.log(req.params.id,req.body,"drone response",response);
+    res.render("./drones/update-form.hbs", { response });
+  })
+  .catch((err) => {
+    next(err);
+  });
+  
+  
   // Iteration #4: Update the drone
   // ... your code here
 });
