@@ -69,16 +69,22 @@ router.get('/drones/:id/edit', (req, res, next) => {
 
 router.post('/drones/:id/edit', (req, res, next) => {
  
-  debugger
+ 
   Drone.findOneAndReplace({"_id":req.params.id},req.body)
  
   .then((response) => {
-    console.log(req.params.id,req.body,"drone response",response);
-    res.render("./drones/update-form.hbs", { response });
+    
+    Drone.find()
+    .then((response) => {
+      console.log(response,"drone response");
+      res.render("./drones/list.hbs", { response });
+    })
+    .catch((err) => {
+      next(err);
   })
   .catch((err) => {
     next(err);
-  });
+  });})
   
   
   // Iteration #4: Update the drone
@@ -88,6 +94,8 @@ router.post('/drones/:id/edit', (req, res, next) => {
 router.post('/drones/:id/delete', (req, res, next) => {
   // Iteration #5: Delete the drone
   // ... your code here
+
+  
 });
 
 module.exports = router;
